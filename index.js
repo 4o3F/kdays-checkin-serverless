@@ -130,5 +130,3 @@ exports.main_handler = async (event, context) => {
         }
     }
 };
-
-exports.main_handler();
