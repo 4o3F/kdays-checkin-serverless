@@ -1,0 +1,22 @@
+component: scf
+name: kdays-autosign
+inputs:
+  name: TimerTask
+  src:
+    src: .
+  handler: index.main_handler
+  runtime: Nodejs18.15
+  namespace: default
+  region: ap-guangzhou
+  memorySize: 128
+  timeout: 30
+  environment:
+    variables:
+      USERNAME: ''
+      PASSWORD: ''
+  triggers:
+    - type: timer
+      name: timer
+      cronExpression: 0 5 * * *
+      argument: ''
+      enable: true
