@@ -1,6 +1,7 @@
 const axios = require('axios');
 
 exports.main_handler = async (event, context) => {
+    let finalError;
     for (let i = 0; i < 5; i++) {
         console.log(`Attempt ${i + 1}`);
         try {
@@ -124,9 +125,22 @@ exports.main_handler = async (event, context) => {
             }
 
             console.log("Weekly checkin successful")
-            return;
+            return {
+                statusCode: 200,
+                body: JSON.stringify({
+                    message: '签到成功',
+                })
+            };
         } catch (error) {
             console.error('An error occurred', error);
+            finalError = error;
         }
     }
+    return {
+        statusCode: 500,
+        body: JSON.stringify({
+          error: finalError.message,
+          stack: finalError.stack
+        })
+      };
 };
